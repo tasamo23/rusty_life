@@ -1,0 +1,10 @@
+- [ ] Deploy to repo
+- [ ] Store Cells as bits instead of bytes
+- [ ] Multithreading/Concurrency
+- Custom colors and render params
+    - [ ] OKLCH
+    - [ ] Background
+    - [ ] Foreground
+    - [ ] Custom shapes / render closures
+    - [ ] Custom border
+- [ ] Burn in images that dissolves
