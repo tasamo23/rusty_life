@@ -14,6 +14,12 @@ pub struct Renderer {
 }
 
 impl Renderer {
+    pub fn new(canvas: HtmlCanvasElement, scale: u32) -> Renderer {
+        let context = get_context_of(&canvas);
+
+        Renderer { context, scale }
+    }
+
     pub fn draw_cells(&self, universe: &Universe) {
         let context = &self.context;
 
@@ -39,12 +45,6 @@ impl Renderer {
                 }
             }
         }
-    }
-
-    pub fn new(canvas: HtmlCanvasElement, scale: u32) -> Renderer {
-        let context = get_context_of(&canvas);
-
-        Renderer { context, scale }
     }
 }
 
