@@ -14,27 +14,6 @@ pub struct Renderer {
 }
 
 impl Renderer {
-    pub fn draw_grid(&self, universe: &Universe) {
-        let context = &self.context;
-
-        context.begin_path();
-
-        for x in 0..universe.width {
-            context.move_to((x * self.scale) as f64, 0.0);
-
-            context.line_to((x * self.scale) as f64, universe.height as f64);
-        }
-        for y in 0..universe.height {
-            context.move_to(0.0, (y * self.scale) as f64);
-
-            context.line_to(universe.width as f64, (y * self.scale) as f64);
-        }
-
-        context.set_stroke_style(&JsValue::from_str("black"));
-        context.set_line_width(2.0);
-        context.stroke()
-    }
-
     pub fn draw_cells(&self, universe: &Universe) {
         let context = &self.context;
 
