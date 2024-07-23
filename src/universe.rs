@@ -2,11 +2,10 @@ use js_sys::Math::random;
 use renderer::create_canvas;
 use renderer::Renderer;
 
+use crate::cell::Cell;
 use crate::wasm_bindgen;
 
 pub mod renderer;
-
-use crate::Cell;
 
 #[wasm_bindgen]
 pub struct Universe {

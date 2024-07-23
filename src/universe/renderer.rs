@@ -4,7 +4,7 @@ use web_sys::window;
 use web_sys::CanvasRenderingContext2d;
 use web_sys::HtmlCanvasElement;
 
-use crate::Cell;
+use crate::cell::Cell;
 
 use super::Universe;
 
