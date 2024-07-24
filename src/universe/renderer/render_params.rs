@@ -33,7 +33,7 @@ impl Color {
         }
     }
 
-    pub fn to_JsValue(&self) -> JsValue {
+    pub fn to_js_value(&self) -> JsValue {
         JsValue::from_str(&self.to_string())
     }
 

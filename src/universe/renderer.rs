@@ -32,7 +32,7 @@ impl Renderer {
     pub fn draw_cells(&self, universe: &Universe) {
         let context = &self.context;
 
-        context.set_fill_style(&self.renderparams.universe_color.to_JsValue());
+        context.set_fill_style(&self.renderparams.universe_color.to_js_value());
         context.fill_rect(
             0.0,
             0.0,
@@ -45,9 +45,9 @@ impl Renderer {
         for x in 0..universe.width {
             for y in 0..universe.height {
                 if universe.cell_at_index(x, y) == Cell::Dead {
-                    context.set_fill_style(&self.renderparams.cell_dead_color.to_JsValue());
+                    context.set_fill_style(&self.renderparams.cell_dead_color.to_js_value());
                 } else {
-                    context.set_fill_style(&self.renderparams.cell_alive_color.to_JsValue());
+                    context.set_fill_style(&self.renderparams.cell_alive_color.to_js_value());
                 }
                 context.fill_rect(
                     (x * self.scale) as f64,
