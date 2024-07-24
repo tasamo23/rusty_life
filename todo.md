@@ -2,9 +2,10 @@
 - [ ] Store Cells as bits instead of bytes
 - [ ] Multithreading/Concurrency
 - Custom colors and render params
+    - [x] Background
+    - [x] Foreground
     - [ ] OKLCH
-    - [ ] Background
-    - [ ] Foreground
     - [ ] Custom shapes / render closures
     - [ ] Custom border
 - [ ] Burn in images that dissolves
+- [ ] Mutation - randomly kill or revive cells around live cells

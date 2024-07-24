@@ -1,8 +1,10 @@
+use render_params::RenderParams;
 use wasm_bindgen::JsCast;
-use wasm_bindgen::JsValue;
 use web_sys::window;
 use web_sys::CanvasRenderingContext2d;
 use web_sys::HtmlCanvasElement;
+
+pub mod render_params;
 
 use crate::cell::Cell;
 
@@ -11,38 +13,48 @@ use super::Universe;
 pub struct Renderer {
     context: CanvasRenderingContext2d,
     scale: u32,
+    renderparams: RenderParams,
 }
 
 impl Renderer {
     pub fn new(canvas: HtmlCanvasElement, scale: u32) -> Renderer {
         let context = get_context_of(&canvas);
 
-        Renderer { context, scale }
+        let renderparams = RenderParams::default();
+
+        Renderer {
+            context,
+            scale,
+            renderparams,
+        }
     }
 
     pub fn draw_cells(&self, universe: &Universe) {
         let context = &self.context;
 
-        context.begin_path();
-        context.clear_rect(
+        context.set_fill_style(&self.renderparams.universe_color.to_JsValue());
+        context.fill_rect(
             0.0,
             0.0,
             (universe.width * self.scale) as f64,
             (universe.height * self.scale) as f64,
         );
 
-        context.set_fill_style(&JsValue::from_str("black"));
+        context.begin_path();
 
         for x in 0..universe.width {
             for y in 0..universe.height {
                 if universe.cell_at_index(x, y) == Cell::Dead {
-                    context.fill_rect(
-                        (x * self.scale) as f64,
-                        (y * self.scale) as f64,
-                        self.scale as f64,
-                        self.scale as f64,
-                    );
+                    context.set_fill_style(&self.renderparams.cell_dead_color.to_JsValue());
+                } else {
+                    context.set_fill_style(&self.renderparams.cell_alive_color.to_JsValue());
                 }
+                context.fill_rect(
+                    (x * self.scale) as f64,
+                    (y * self.scale) as f64,
+                    self.scale as f64,
+                    self.scale as f64,
+                );
             }
         }
     }
