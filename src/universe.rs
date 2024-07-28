@@ -2,8 +2,11 @@ use js_sys::Math::random;
 use renderer::create_canvas;
 use renderer::Renderer;
 
-use crate::cell::Cell;
 use crate::wasm_bindgen;
+
+extern crate fixedbitset;
+
+use fixedbitset::FixedBitSet;
 
 pub mod renderer;
 
@@ -11,24 +14,20 @@ pub mod renderer;
 pub struct Universe {
     width: u32,
     height: u32,
-    cells: Vec<Cell>,
+    cells: FixedBitSet,
     renderer: Renderer,
 }
 
 #[wasm_bindgen]
 impl Universe {
     pub fn new(width: u32, height: u32) -> Universe {
-        let cells = (0..width * height)
-            .map(|_| {
-                if random() > 0.7 {
-                    Cell::Alive
-                } else {
-                    Cell::Dead
-                }
-            })
-            .collect::<Vec<Cell>>();
+        let mut cells = FixedBitSet::with_capacity((width * height) as usize);
 
-        let scale = 4;
+        for i in 0..(width * height) {
+            cells.set(i as usize, random() > 0.7);
+        }
+
+        let scale = 10;
 
         let canvas = create_canvas(width, height, scale);
 
@@ -56,14 +55,14 @@ impl Universe {
                 let live_neighbors = self.live_neighbor_count(x, y);
 
                 let next_cell_state = match (cell, live_neighbors) {
-                    (Cell::Alive, x) if x < 2 => Cell::Dead,
-                    (Cell::Alive, 2) | (Cell::Alive, 3) => Cell::Alive,
-                    (Cell::Alive, x) if x > 3 => Cell::Dead,
-                    (Cell::Dead, 3) => Cell::Alive,
+                    (true, x) if x < 2 => false,
+                    (true, 2) | (true, 3) => true,
+                    (true, x) if x > 3 => false,
+                    (false, 3) => true,
                     (otherwise, _) => otherwise,
                 };
 
-                next_cells[self.get_index(x, y)] = next_cell_state;
+                next_cells.set(self.get_index(x, y), next_cell_state);
             }
         }
 
@@ -72,7 +71,7 @@ impl Universe {
 }
 
 impl Universe {
-    pub fn cell_at_index(&self, x: u32, y: u32) -> Cell {
+    pub fn cell_at_index(&self, x: u32, y: u32) -> bool {
         self.cells[self.get_index(x, y)]
     }
 
@@ -88,7 +87,11 @@ impl Universe {
                 if (offset_x != 0) || (offset_y != 0) {
                     let index_x = (offset_x + x) % self.width;
                     let index_y = (offset_y + y) % self.height;
-                    count += self.cell_at_index(index_x, index_y) as u8;
+                    count += if self.cell_at_index(index_x, index_y) {
+                        1
+                    } else {
+                        0
+                    };
                 }
             }
         }

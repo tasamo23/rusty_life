@@ -6,8 +6,6 @@ use web_sys::HtmlCanvasElement;
 
 pub mod render_params;
 
-use crate::cell::Cell;
-
 use super::Universe;
 
 pub struct Renderer {
@@ -44,10 +42,10 @@ impl Renderer {
 
         for x in 0..universe.width {
             for y in 0..universe.height {
-                if universe.cell_at_index(x, y) == Cell::Dead {
-                    context.set_fill_style(&self.renderparams.cell_dead_color.to_js_value());
-                } else {
+                if universe.cell_at_index(x, y) {
                     context.set_fill_style(&self.renderparams.cell_alive_color.to_js_value());
+                } else {
+                    context.set_fill_style(&self.renderparams.cell_dead_color.to_js_value());
                 }
                 context.fill_rect(
                     (x * self.scale) as f64,
