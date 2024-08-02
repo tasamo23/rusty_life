@@ -1,4 +1,4 @@
-import { Universe } from './pkg';
+import { Universe } from './pkg/rusty_life';
 
 const universe = Universe.new(64, 64);
 universe.render()
