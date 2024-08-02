@@ -1,6 +1,6 @@
 {
     "name": "@tasamo23/rusty_life",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "author": "Masato Arnold",
     "scripts": {
         "dev": "vite",
