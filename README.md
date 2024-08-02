@@ -19,4 +19,4 @@ I plan on polishing my Rust skills by developing programs like these. I always l
 If I actually 😏commit to this Game of Life project, you may see it at some point on my website (WIP).
 
 To make that happen, I'll publish the WASM code to NPM/GitHub Packages and open up an easy API, so everyone could use the project by just importing the packages and calling one function. One should be able to customize everything about it, the obvious things being color, tick speed and starting formation. 
-All features I want to implement are written down in the [Markdown TODO list](./TODO.md).
+All features I want to implement are written down in the [Markdown TODO list](./todo.md).
