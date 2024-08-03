@@ -1,14 +1,14 @@
 import { Universe } from './pkg/rusty_life';
 
+const tickSpeed = 100;
+
 const universe = Universe.new(64, 64);
 universe.render()
 
 const renderLoop = () => {
     universe.tick()
     universe.render()
-    setTimeout(renderLoop, 500)
-    // requestAnimationFrame(renderLoop);
+    setTimeout(renderLoop, tickSpeed)
 }
 
-setTimeout(renderLoop, 100)
-// requestAnimationFrame(renderLoop);
+setTimeout(renderLoop, tickSpeed)

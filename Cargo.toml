@@ -3,9 +3,11 @@ name = "rusty_life"
 version = "1.0.0"
 edition = "2021"
 authors = ["Masato Arnold"]
-license="MIT"
-description="A rust implementation of the popular game of life"
-repository="https://github.com/tasamo23/rusty_life"
+license = "MIT"
+description = "A rust implementation of the popular game of life"
+keywords = ["rust", "conways-game-of-life"]
+repository = "git+https://github.com/tasamo23/rusty_life"
+readme = "PACKAGE.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

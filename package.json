@@ -2,10 +2,13 @@
     "name": "@tasamo23/rusty_life",
     "version": "1.0.0",
     "author": "Masato Arnold",
+    "keywords": [
+        "rust",
+        "conways-game-of-life"
+    ],
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview"
+        "build": "wasm-pack build --scope tasamo23"
     },
     "repository": {
         "type": "git",
