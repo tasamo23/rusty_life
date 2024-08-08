@@ -17,6 +17,7 @@ pub struct Universe {
     cells: FixedBitSet,
     renderer: Renderer,
     mutation_rate: f64,
+    dynamic_mutation_rate: bool,
 }
 
 #[wasm_bindgen]
@@ -31,6 +32,7 @@ impl Universe {
         let scale = 10;
 
         let mutation_rate = 0.01;
+        let dynamic_mutation_rate = false;
 
         let canvas = create_canvas(width, height, scale);
 
@@ -42,6 +44,7 @@ impl Universe {
             cells,
             renderer,
             mutation_rate,
+            dynamic_mutation_rate,
         }
     }
 
@@ -71,11 +74,21 @@ impl Universe {
             }
         }
 
+        if self.dynamic_mutation_rate {
+            self.mutation_rate = (self.cells.count_zeroes(..) / (self.width * self.height) as usize)
+                .pow(4) as f64
+                * 0.01;
+        }
+
         self.cells = next_cells;
     }
 
     pub fn set_mutation_rate(&mut self, new_rate: f64) {
         self.mutation_rate = new_rate
+    }
+
+    pub fn set_dynamic_mutation_rate(&mut self, new_val: bool) {
+        self.dynamic_mutation_rate = new_val
     }
 }
 
