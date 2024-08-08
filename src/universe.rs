@@ -16,6 +16,7 @@ pub struct Universe {
     height: u32,
     cells: FixedBitSet,
     renderer: Renderer,
+    mutation_rate: f64,
 }
 
 #[wasm_bindgen]
@@ -29,6 +30,8 @@ impl Universe {
 
         let scale = 10;
 
+        let mutation_rate = 0.01;
+
         let canvas = create_canvas(width, height, scale);
 
         let renderer = Renderer::new(canvas, scale);
@@ -38,6 +41,7 @@ impl Universe {
             height,
             cells,
             renderer,
+            mutation_rate,
         }
     }
 
@@ -59,6 +63,7 @@ impl Universe {
                     (true, 2) | (true, 3) => true,
                     (true, x) if x > 3 => false,
                     (false, 3) => true,
+                    (false, x) if x > 0 => random() < self.mutation_rate,
                     (otherwise, _) => otherwise,
                 };
 
@@ -67,6 +72,10 @@ impl Universe {
         }
 
         self.cells = next_cells;
+    }
+
+    pub fn set_mutation_rate(&mut self, new_rate: f64) {
+        self.mutation_rate = new_rate
     }
 }
 
