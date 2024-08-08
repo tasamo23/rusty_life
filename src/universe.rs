@@ -75,9 +75,8 @@ impl Universe {
         }
 
         if self.dynamic_mutation_rate {
-            self.mutation_rate = (self.cells.count_zeroes(..) / (self.width * self.height) as usize)
-                .pow(4) as f64
-                * 0.01;
+            self.mutation_rate =
+                (next_cells.count_zeroes(..) as f64 / (self.width * self.height) as f64) * 0.01;
         }
 
         self.cells = next_cells;
