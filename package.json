@@ -8,7 +8,8 @@
     ],
     "scripts": {
         "dev": "vite",
-        "build": "wasm-pack build --scope tasamo23"
+        "build": "wasm-pack build --scope tasamo23",
+        "publish": "wasm-pack build --access=public"
     },
     "repository": {
         "type": "git",
