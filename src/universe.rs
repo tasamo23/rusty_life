@@ -16,8 +16,8 @@ pub struct Universe {
     height: u32,
     cells: FixedBitSet,
     renderer: Renderer,
-    mutation_rate: f64,
-    dynamic_mutation_rate: bool,
+    pub mutation_rate: f64,
+    pub dynamic_mutation_rate: bool,
 }
 
 #[wasm_bindgen]
@@ -80,14 +80,6 @@ impl Universe {
         }
 
         self.cells = next_cells;
-    }
-
-    pub fn set_mutation_rate(&mut self, new_rate: f64) {
-        self.mutation_rate = new_rate
-    }
-
-    pub fn set_dynamic_mutation_rate(&mut self, new_val: bool) {
-        self.dynamic_mutation_rate = new_val
     }
 }
 
