@@ -20,4 +20,4 @@ Alternatively, the `setTimeout` calls can be replaced by `requestAnimationFrame(
 
 Don't forget to import `Universe` from the package!
 
-For a detailed description of the project, check out my GitHub Repo on https://github.com/tasamo23/rusty_life👍
+**For a detailed description of the project, check out my GitHub Repo on https://github.com/tasamo23/rusty_life👍**
