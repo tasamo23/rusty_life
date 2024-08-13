@@ -7,7 +7,7 @@
         "conways-game-of-life"
     ],
     "scripts": {
-        "dev": "vite",
+        "dev": "wasm-pack build --scope tasamo23 && vite",
         "build": "wasm-pack build --scope tasamo23",
         "publish": "wasm-pack publish --access=public"
     },
