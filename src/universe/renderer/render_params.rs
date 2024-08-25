@@ -4,6 +4,7 @@ pub struct RenderParams {
     pub cell_alive_color: Color,
     pub cell_dead_color: Color,
     pub universe_color: Color,
+    pub force_rgb: bool,
 }
 
 impl RenderParams {
@@ -12,6 +13,7 @@ impl RenderParams {
             cell_alive_color: Color::rgb(255, 255, 255),
             cell_dead_color: Color::rgb(0, 0, 0),
             universe_color: Color::rgb(100, 100, 100),
+            force_rgb: false,
         }
     }
 }
