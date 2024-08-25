@@ -1,3 +1,6 @@
+use std::f64::consts::PI;
+
+use js_sys::Math::{cos, sin};
 use wasm_bindgen::JsValue;
 
 pub struct RenderParams {
@@ -45,5 +48,19 @@ impl Color {
 
     pub fn oklch(l: f64, c: f64, h: f64) -> Color {
         Color::OKLCH { l, c, h }
+    }
+
+    pub fn to_rgb(color: Color) -> Color {
+        // https://gist.github.com/dkaraush/65d19d61396f5f3cd8ba7d1b4b3c9432
+        match color {
+            Color::RGB { r, g, b } => Color::rgb(r, g, b),
+            Color::OKLCH { l, c, h } => {
+                let color_vals = [l, c, h];
+
+                let oklab = [l, c * cos(h * PI / 180.0), c * sin(h * PI / 180.0)];
+
+                Color::OKLCH { l, c, h }
+            }
+        }
     }
 }
